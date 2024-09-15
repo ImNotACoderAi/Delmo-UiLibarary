@@ -183,7 +183,7 @@ do
 			UI["65"]["BackgroundTransparency"] = 1;
 			UI["65"]["ZIndex"] = 69420;
 			UI["65"]["Name"] = [[Exit]];
-			UI["65"]["Position"] = UDim2.new(0, 5, 0.5, 0);
+			UI["65"]["Position"] = UDim2.new(0, 37, 0.5, 0);
 
 
 			-- StarterGui.bombaclat.Navigation.Maximize
@@ -205,7 +205,7 @@ do
 			UI["67"]["BackgroundTransparency"] = 1;
 			UI["67"]["ZIndex"] = 69420;
 			UI["67"]["Name"] = [[Minimize]];
-			UI["67"]["Position"] = UDim2.new(1, -5, 0.5, 0);
+			UI["67"]["Position"] = UDim2.new(1, -37, 0.5, 0);
 
 			-- StarterGui.bombaclat.Notifs Holder
 			UI["4f"] = Instance.new("Frame", UI["1"]);
