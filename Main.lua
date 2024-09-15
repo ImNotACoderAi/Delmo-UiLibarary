@@ -91,7 +91,10 @@ do
 
 	function Init(options)
 		local options = ValidateS({
-			Title = "TEKKIT AoT:R"
+			Title = "TEKKIT AoT:R",
+			Socials = false,
+			Discord = "",
+			Youtube = ""
 		}, options or {})
 
 		UI = {
@@ -116,11 +119,29 @@ do
 			UI["61"]["BorderSizePixel"] = 0;
 			UI["61"]["BackgroundColor3"] = Color3.fromRGB(13, 13, 13);
 			UI["61"]["AnchorPoint"] = Vector2.new(0.5, 0);
-			UI["61"]["Size"] = UDim2.new(0, 105, 0, 30);
+			UI["61"]["Size"] = UDim2.new(0, 155, 0, 30);
 			UI["61"]["Position"] = UDim2.new(0.5, 0, 0, 5);
 			UI["61"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 			UI["61"]["Name"] = [[Navigation]];
+			
+			-- StarterGui.bombaclat.Navigation.Youtube
+			UI["68"] = Instance.new("ImageLabel", UI["61"]);
+			UI["68"]["AnchorPoint"] = Vector2.new(0, 0.5);
+			UI["68"]["Image"] = [[rbxassetid://15199293149]];
+			UI["68"]["Size"] = UDim2.new(0, 20, 0, 20);
+			UI["68"]["BackgroundTransparency"] = 1;
+			UI["68"]["Name"] = [[Youtube]];
+			UI["68"]["Position"] = UDim2.new(0, 5, 0.5, 0);
 
+
+			-- StarterGui.bombaclat.Navigation.Discord
+			UI["69"] = Instance.new("ImageLabel", UI["61"]);
+			UI["69"]["AnchorPoint"] = Vector2.new(1, 0.5);
+			UI["69"]["Image"] = [[rbxassetid://127970682686597]];
+			UI["69"]["Size"] = UDim2.new(0, 20, 0, 20);
+			UI["69"]["BackgroundTransparency"] = 1;
+			UI["69"]["Name"] = [[Discord]];
+			UI["69"]["Position"] = UDim2.new(1, -5, 0.5, 0);
 
 			-- StarterGui.bombaclat.Navigation.UICorner
 			UI["62"] = Instance.new("UICorner", UI["61"]);
@@ -1158,7 +1179,6 @@ do
 				end
 				runService.RenderStepped:Connect(onRenderStep)
 			end	
-
 			-- Exit
 			do
 				UI["65"].MouseEnter:Connect(function()
@@ -1199,7 +1219,6 @@ do
 					end
 				end)
 			end
-
 			-- Maximize
 			do
 				UI["66"].MouseEnter:Connect(function()
@@ -1218,7 +1237,6 @@ do
 					end
 				end)
 			end
-
 			-- Minimize
 			do
 				UI["67"].MouseEnter:Connect(function()
@@ -1236,7 +1254,36 @@ do
 					end
 				end)
 			end
+			-- Socials
+			do
+				UI["69"].MouseEnter:Connect(function()
+					UI.DiscordHover = true
+				end)
+				
+				UI["69"].MouseLeave:Connect(function()
+					UI.DiscordHover = false
+				end)
+				
+				UI["68"].MouseEnter:Connect(function()
+					UI.YoutubeHover = true
+				end)
 
+				UI["68"].MouseLeave:Connect(function()
+					UI.YoutubeHover = false
+				end)
+				
+				UIS.InputBegan:Connect(function(input)
+					if input.UserInputType == Enum.UserInputType.MouseButton1 and UI.DiscordHover then
+						setclipboard(options["Discord"])
+					end
+				end)
+				
+				UIS.InputBegan:Connect(function(input)
+					if input.UserInputType == Enum.UserInputType.MouseButton1 and UI.YoutubeHover then
+						setclipboard(options["Youtube"])
+					end
+				end)
+			end
 			Cursor(UI["2"], 83884515509675)
 			NOTSTOLENDRAG(UI["2"])
 		end
