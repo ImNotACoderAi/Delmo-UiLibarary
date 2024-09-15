@@ -466,7 +466,7 @@ do
 					end)
 
 					UIS.InputBegan:Connect(function(input)
-						if input.UserInputType == Enum.UserInputType.MouseButton1 and Tab.Hover or Enum.UserInputType.Touch and Tab.Hover then
+						if input.UserInputType == Enum.UserInputType.MouseButton1 and Tab.Hover then
 							Tab:Activate()
 						end
 					end)
