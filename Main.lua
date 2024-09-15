@@ -574,13 +574,14 @@ do
 					function Tab:Toggle(options)
 						options = ValidateS({
 							Title = "Preview Toggle",
+							State = false,
 							Callback = function(v) print(v) end
 						}, options or {})
 
 						local Toggle = {
 							Hover = false,
 							MouseDown = false,
-							State = false
+							State = options.State
 						}
 
 						-- Rendering
@@ -645,6 +646,8 @@ do
 								end
 								options.Callback(Toggle.State)	
 							end
+							
+							Toggle:ChangeState_(options.State)
 
 							Toggle["1b"].InputBegan:Connect(function()
 								Toggle.Hover = true
@@ -742,7 +745,7 @@ do
 							Slider["27"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
 							Slider["27"]["BackgroundTransparency"] = 1;
 							Slider["27"]["Size"] = UDim2.new(1, 0, 1, 0);
-							Slider["27"]["Text"] = [[50]];
+							Slider["27"]["Text"] = options["Default"];
 							Slider["27"]["Name"] = [[Value]];
 							Slider["27"]["Position"] = UDim2.new(0, -2, 0, 2);
 
@@ -768,12 +771,11 @@ do
 							Slider["2a"] = Instance.new("UICorner", Slider["29"]);
 							Slider["2a"]["CornerRadius"] = UDim.new(0, 12);
 
-
 							-- StarterGui.bombaclat.UI.MainArea.Tab.Slider.SliderBG.Drag
 							Slider["2b"] = Instance.new("Frame", Slider["29"]);
 							Slider["2b"]["BorderSizePixel"] = 0;
 							Slider["2b"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-							Slider["2b"]["Size"] = UDim2.new(0.5, 0, 1, 0);
+							Slider["2b"]["Size"] = UDim2.fromScale(((options.Default - options.Min) / (options.Max - options.Min)), 1);
 							Slider["2b"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 							Slider["2b"]["Name"] = [[Drag]];
 
@@ -949,7 +951,7 @@ do
 						-- Logic
 						do
 							function Dropdown:Add(Id, Title, Callback)
-								Callback = Callback or function() end
+								Callback = Callback or function(v) print(v) end
 								local Item = {
 									Hover = false,
 									MouseDown = false,
