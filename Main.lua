@@ -466,7 +466,8 @@ do
 					end)
 
 					UIS.InputBegan:Connect(function(input, gpe)
-						if gpe then print("gpe is the culprit") return end
+						if gpe then return end
+			
 						if input.UserInputType == Enum.UserInputType.MouseButton1 and Tab.Hover or Enum.UserInputType.Touch and Tab.Hover then
 							Tab:Activate()
 						end
@@ -550,7 +551,8 @@ do
 								end
 							end)
 
-							UIS.InputBegan:Connect(function(input)
+							UIS.InputBegan:Connect(function(input, gpe)
+								if gpe then return end
 								if input.UserInputType == Enum.UserInputType.MouseButton1 and Button.Hover or Enum.UserInputType.Touch and Button.Hover then
 									Button.MouseDown = true
 									Tween(Button["20"], {TextColor3 = Color3.fromRGB(255, 255, 255)}, 0.4)
@@ -558,7 +560,8 @@ do
 								end
 							end)
 
-							UIS.InputEnded:Connect(function(input)
+							UIS.InputEnded:Connect(function(input, gpe)
+								if gpe then return end
 								if input.UserInputType == Enum.UserInputType.MouseButton1 or Enum.UserInputType.Touch then
 									Button.MouseDown = false
 									if Button.Hover then
