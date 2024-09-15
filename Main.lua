@@ -85,8 +85,10 @@ do
 
 	if UIS.TouchEnabled then
 		UISIZE = UDim2.new(0, 370, 0, 220)
+		Mobile = true
 	else
 		UISIZE = UDim2.new(0, 470, 0, 320)
+		Mobile = false
 	end
 
 	function Init(options)
@@ -465,11 +467,12 @@ do
 						end
 					end)
 
-					UIS.InputBegan:Connect(function(input, gpe)
-						if gpe then return end
-			
-						if input.UserInputType == Enum.UserInputType.MouseButton1 and Tab.Hover or Enum.UserInputType.Touch and Tab.Hover then
-							Tab:Activate()
+					UIS.InputBegan:Connect(function(input)
+						if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and Tab.Hover then
+							Tab:Activate()	
+							print("yes go in")
+						else
+							return
 						end
 					end)
 
@@ -551,24 +554,26 @@ do
 								end
 							end)
 
-							UIS.InputBegan:Connect(function(input, gpe)
-								if gpe then return end
-								if input.UserInputType == Enum.UserInputType.MouseButton1 and Button.Hover or Enum.UserInputType.Touch and Button.Hover then
+							UIS.InputBegan:Connect(function(input)
+								if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and Button.Hover then
 									Button.MouseDown = true
 									Tween(Button["20"], {TextColor3 = Color3.fromRGB(255, 255, 255)}, 0.4)
 									options.Callback()
+								else
+									return
 								end
 							end)
 
-							UIS.InputEnded:Connect(function(input, gpe)
-								if gpe then return end
-								if input.UserInputType == Enum.UserInputType.MouseButton1 or Enum.UserInputType.Touch then
+							UIS.InputEnded:Connect(function(input)
+								if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 									Button.MouseDown = false
 									if Button.Hover then
 										Tween(Button["20"], {TextColor3 = Color3.fromRGB(230, 230, 230)}, 0.4)
 									else
 										Tween(Button["20"], {TextColor3 = Color3.fromRGB(200, 200, 200)}, 0.4)
 									end
+								else
+									return
 								end
 							end)
 						end
@@ -670,20 +675,24 @@ do
 							end)
 
 							UIS.InputBegan:Connect(function(input)
-								if input.UserInputType == Enum.UserInputType.MouseButton1 and Toggle.Hover or Enum.UserInputType.Touch and Toggle.Hover then
+								if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and Toggle.Hover then
 									Toggle.MouseDown = true
 									Toggle:ChangeState_()
+								else
+									return
 								end
 							end)
 
 							UIS.InputEnded:Connect(function(input)
-								if input.UserInputType == Enum.UserInputType.MouseButton1 or Enum.UserInputType.Touch then
+								if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 									Toggle.MouseDown = false
 									if Toggle.Hover then
 										Tween(Toggle["1b"], {TextColor3 = Color3.fromRGB(230, 230, 230)}, 0.4)
 									else
 										Tween(Toggle["1b"], {TextColor3 = Color3.fromRGB(200, 200, 200)}, 0.4)
 									end
+								else
+									return
 								end
 							end)
 						end
@@ -824,7 +833,7 @@ do
 							end)
 
 							UIS.InputBegan:Connect(function(input)
-								if input.UserInputType == Enum.UserInputType.MouseButton1 and Slider.Hover or Enum.UserInputType.Touch and Slider.Hover then
+								if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and Slider.Hover then
 									stop = true
 									Slider.MouseDown = true
 									Tween(Slider["24"], {TextColor3 = Color3.fromRGB(255, 255, 255)}, 0.5)
@@ -834,11 +843,13 @@ do
 											Slider:SetValue()
 										end)
 									end
+								else
+									return
 								end
 							end)
 
 							UIS.InputEnded:Connect(function(input)
-								if input.UserInputType == Enum.UserInputType.MouseButton1 or Enum.UserInputType.Touch then
+								if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 									stop = false
 									Slider.MouseDown = false
 
@@ -850,6 +861,8 @@ do
 
 									if Slider.Connection then Slider.Connection:Disconnect() end
 									Slider.Connection = nil
+								else
+									return
 								end
 							end)
 						end
@@ -1126,23 +1139,27 @@ do
 							end)
 
 							UIS.InputBegan:Connect(function(input)
-								if input.UserInputType == Enum.UserInputType.MouseButton1 and Dropdown.Hover or Enum.UserInputType.Touch and Dropdown.Hover then
+								if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and Dropdown.Hover then
 									Dropdown.MouseDown = true
 									Tween(Dropdown["3e"], {TextColor3 = Color3.fromRGB(255, 255 ,255)}, 0.2)
 									if not Dropdown.HoveringItem then
 										Dropdown:Toggle()
 									end
+								else
+									return
 								end
 							end)
 
 							UIS.InputEnded:Connect(function(input)
-								if input.UserInputType == Enum.UserInputType.MouseButton1 or Enum.UserInputType.Touch then
+								if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 									Dropdown.MouseDown = false
 									if Dropdown.Hover then
 										Tween(Dropdown["3e"], {TextColor3 = Color3.fromRGB(230, 230, 230)}, 0.2)
 									else
 										Tween(Dropdown["3e"], {TextColor3 = Color3.fromRGB(200, 200, 200)}, 0.2)
 									end
+								else
+									return
 								end
 							end)	
 						end						
@@ -1198,7 +1215,7 @@ do
 				end)
 
 				UIS.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 and UI.ExitHover or Enum.UserInputType.Touch and UI.ExitHover then
+					if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and UI.ExitHover then
 						for i, v in UI["2"]:GetDescendants() do
 							if v:IsA("ImageLabel") then
 								Tween(v, {ImageTransparency = 1}, 1)
@@ -1238,7 +1255,7 @@ do
 				end)
 
 				UIS.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 and UI.MaximizeHover or Enum.UserInputType.Touch and UI.MaximizeHover then
+					if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and UI.MaximizeHover then
 						Tween(UI["2"], {Size = UDim2.new(1, 0, 1, 0)}, 0.2)
 						Tween(UI["2"], {Position = UDim2.new(0.5, 0, 0.5, 0)}, 0.2)
 						stopforce = true
@@ -1256,7 +1273,7 @@ do
 				end)
 
 				UIS.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 and UI.MinimizeHover or Enum.UserInputType.Touch and UI.MinimizeHover then
+					if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and UI.MinimizeHover then
 						Tween(UI["2"], {Size = UISIZE}, 0.8)
 						stopforce = false
 					end
@@ -1281,13 +1298,16 @@ do
 				end)
 				
 				UIS.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 and UI.DiscordHover then
+					if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and UI.DiscordHover then
 						setclipboard(options["Discord"])
+						print("hover")
+					else
+						return
 					end
 				end)
 				
 				UIS.InputBegan:Connect(function(input)
-					if input.UserInputType == Enum.UserInputType.MouseButton1 and UI.YoutubeHover then
+					if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and UI.YoutubeHover then
 						setclipboard(options["Youtube"])
 					end
 				end)
