@@ -130,6 +130,7 @@ do
 			UI["68"]["Image"] = [[rbxassetid://15199293149]];
 			UI["68"]["Size"] = UDim2.new(0, 20, 0, 20);
 			UI["68"]["BackgroundTransparency"] = 1;
+			UI["68"]["ZIndex"] = 69420;
 			UI["68"]["Name"] = [[Youtube]];
 			UI["68"]["Position"] = UDim2.new(0, 5, 0.5, 0);
 
@@ -140,6 +141,7 @@ do
 			UI["69"]["Image"] = [[rbxassetid://127970682686597]];
 			UI["69"]["Size"] = UDim2.new(0, 20, 0, 20);
 			UI["69"]["BackgroundTransparency"] = 1;
+			UI["69"]["ZIndex"] = 69420;
 			UI["69"]["Name"] = [[Discord]];
 			UI["69"]["Position"] = UDim2.new(1, -5, 0.5, 0);
 
@@ -1208,7 +1210,7 @@ do
 								if v:IsA("ImageLabel") then
 									Tween(v, {ImageTransparency = 1}, 1)
 									Tween(v, {BackgroundTransparency = 1}, 1, function() 
-										Tween(UI["61"], {Size = UDim2.new(0, 105, 0, 0)}, 2, function() 
+										Tween(UI["61"], {Size = UDim2.new(0, 155, 0, 0)}, 2, function() 
 											wait(2)
 											UI["1"]:Destroy()
 										end)
