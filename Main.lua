@@ -125,7 +125,7 @@ do
 			UI["61"]["Position"] = UDim2.new(0.5, 0, 0, 5);
 			UI["61"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 			UI["61"]["Name"] = [[Navigation]];
-			
+
 			-- StarterGui.bombaclat.Navigation.Youtube
 			UI["68"] = Instance.new("ImageLabel", UI["61"]);
 			UI["68"]["AnchorPoint"] = Vector2.new(0, 0.5);
@@ -655,7 +655,7 @@ do
 								end
 								options.Callback(Toggle.State)	
 							end
-							
+
 							Toggle:ChangeState_(options.State)
 
 							Toggle["1b"].InputBegan:Connect(function()
@@ -983,7 +983,7 @@ do
 									instance = {},
 									value = Title
 								}
-								
+
 								-- Rendering
 								do
 									-- StarterGui.bombaclat.UI.MainArea.Tab.Dropdown.DropdownItems.Item
@@ -1002,7 +1002,7 @@ do
 									-- StarterGui.bombaclat.UI.MainArea.Tab.Dropdown.DropdownItems.Item.UICorner
 									Dropdown.Items[Id].instance["4a"] = Instance.new("UICorner", Dropdown.Items[Id].instance["49"]);
 									Dropdown.Items[Id].instance["4a"]["CornerRadius"] = UDim.new(0, 4);
-									
+
 									-- StarterGui.bombaclat.UI.MainArea.Tab.Dropdown.DropdownItems.Item.UIPadding
 									Dropdown.Items[Id].instance["4b"] = Instance.new("UIPadding", Dropdown.Items[Id].instance["49"]);
 									Dropdown.Items[Id].instance["4b"]["PaddingLeft"] = UDim.new(0, 5);
@@ -1016,7 +1016,7 @@ do
 											Tween(Dropdown.Items[Id].instance["49"], {BackgroundColor3 = Color3.fromRGB(19, 19, 19)}, 0.2)
 										end
 									end
-									
+
 									Dropdown.Items[Id].instance["49"].MouseEnter:Connect(function()
 										Item.Hover = true
 										Dropdown.HoveringItem = true
@@ -1072,7 +1072,7 @@ do
 									end)
 								end
 							end
-							
+
 							function Dropdown:GetSelectedItems()
 								local selectedText = ""
 
@@ -1088,7 +1088,7 @@ do
 									return selectedText:sub(1, -3)
 								end
 							end
-							
+
 							function Dropdown:Remove(id)
 								if Dropdown.Items[id] ~= nil then
 									if Dropdown.Items[id].instance ~= nil then
@@ -1099,7 +1099,7 @@ do
 									Dropdown.Items[id] = nil
 								end
 							end
-							
+
 							function Dropdown:Clear()
 								for i, v in pairs(Dropdown.Items) do
 									Dropdown:Remove(i)
@@ -1125,7 +1125,7 @@ do
 									Tween(Dropdown["3e"], {Size = UDim2.new(1, -20, 0, 17 + (count * 26) + 1)}, 0.2)
 								end
 							end
-							
+
 							Dropdown["3e"].MouseEnter:Connect(function()
 								Dropdown.Hover = true
 								Tween(Dropdown["3e"], {TextColor3 = Color3.fromRGB(230, 230, 230)}, 0.2)
@@ -1284,11 +1284,11 @@ do
 				UI["69"].MouseEnter:Connect(function()
 					UI.DiscordHover = true
 				end)
-				
+
 				UI["69"].MouseLeave:Connect(function()
 					UI.DiscordHover = false
 				end)
-				
+
 				UI["68"].MouseEnter:Connect(function()
 					UI.YoutubeHover = true
 				end)
@@ -1296,7 +1296,7 @@ do
 				UI["68"].MouseLeave:Connect(function()
 					UI.YoutubeHover = false
 				end)
-				
+
 				UIS.InputBegan:Connect(function(input)
 					if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and UI.DiscordHover then
 						setclipboard(options["Discord"])
@@ -1305,7 +1305,7 @@ do
 						return
 					end
 				end)
-				
+
 				UIS.InputBegan:Connect(function(input)
 					if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and UI.YoutubeHover then
 						setclipboard(options["Youtube"])
@@ -1414,6 +1414,20 @@ do
 		end
 		-- Logic
 		do
+			function WarningUI:Update_()
+				WarningUI["55"].Text = options["Desc"]
+				WarningUI["54"].Text = options["Title"]
+				WarningUI["55"].Size = UDim2.new(WarningUI["55"].Size.X.Scale, WarningUI["55"].Size.X.Offset, 0, math.huge)
+				WarningUI["55"].Size = UDim2.new(WarningUI["55"].Size.X.Scale, WarningUI["55"].Size.X.Offset, 0, WarningUI["55"].TextBounds.Y + 9)
+				WarningUI["54"].Size = UDim2.new(WarningUI["54"].Size.X.Scale, WarningUI["54"].Size.X.Offset, 0, math.huge)
+				WarningUI["54"].Size = UDim2.new(WarningUI["54"].Size.X.Scale, WarningUI["54"].Size.X.Offset, 0, WarningUI["54"].TextBounds.Y)
+				WarningUI["55"].Position = UDim2.new(WarningUI["54"].Position.X.Scale, WarningUI["54"].Position.X.Offset, 0, math.huge)
+				WarningUI["55"].Position = UDim2.new(WarningUI["54"].Position.X.Scale, WarningUI["54"].Position.X.Offset, 0, WarningUI["54"].TextBounds.Y + 19)
+				Tween(WarningUI["50"], {Size = UDim2.new(WarningUI["50"].Size.X.Scale, WarningUI["50"].Size.X.Offset, 0, WarningUI["55"].TextBounds.Y + WarningUI["54"].TextBounds.Y + 34)}, 0.2)
+			end
+			
+			WarningUI:Update_()
+			
 			wait(4)
 			for i, v in WarningUI["50"]:GetDescendants() do
 				if v:IsA("ImageLabel") then
@@ -1489,6 +1503,7 @@ do
 			-- StarterGui.bombaclat.Notifs Holder.Notif.NotifType
 			NotifUI["5e"] = Instance.new("TextLabel", NotifUI["59"]);
 			NotifUI["5e"]["BorderSizePixel"] = 0;
+			NotifUI["5e"]["TextWrapped"] = true;
 			NotifUI["5e"]["TextXAlignment"] = Enum.TextXAlignment.Left;
 			NotifUI["5e"]["TextYAlignment"] = Enum.TextYAlignment.Top;
 			NotifUI["5e"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
@@ -1530,6 +1545,20 @@ do
 		end
 		-- Logic
 		do
+			function NotifUI:Update_()
+				NotifUI["5f"].Text = options["Desc"]
+				NotifUI["5e"].Text = options["Title"]
+				NotifUI["5f"].Size = UDim2.new(NotifUI["5f"].Size.X.Scale, NotifUI["5f"].Size.X.Offset, 0, math.huge)
+				NotifUI["5f"].Size = UDim2.new(NotifUI["5f"].Size.X.Scale, NotifUI["5f"].Size.X.Offset, 0, NotifUI["5f"].TextBounds.Y + 9)
+				NotifUI["5e"].Size = UDim2.new(NotifUI["5e"].Size.X.Scale, NotifUI["5e"].Size.X.Offset, 0, math.huge)
+				NotifUI["5e"].Size = UDim2.new(NotifUI["5e"].Size.X.Scale, NotifUI["5e"].Size.X.Offset, 0, NotifUI["5e"].TextBounds.Y)
+				NotifUI["5f"].Position = UDim2.new(NotifUI["5e"].Position.X.Scale, NotifUI["5e"].Position.X.Offset, 0, math.huge)
+				NotifUI["5f"].Position = UDim2.new(NotifUI["5e"].Position.X.Scale, NotifUI["5e"].Position.X.Offset, 0, NotifUI["5e"].TextBounds.Y + 19)
+				Tween(NotifUI["59"], {Size = UDim2.new(NotifUI["59"].Size.X.Scale, NotifUI["59"].Size.X.Offset, 0, NotifUI["5f"].TextBounds.Y + NotifUI["5e"].TextBounds.Y + 34)}, 0.2)
+			end
+
+			NotifUI:Update_()
+
 			wait(4)
 			for i, v in NotifUI["59"]:GetDescendants() do
 				if v:IsA("ImageLabel") then
