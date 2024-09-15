@@ -465,8 +465,9 @@ do
 						end
 					end)
 
-					UIS.InputBegan:Connect(function(input)
-						if input.UserInputType == Enum.UserInputType.MouseButton1 and Tab.Hover then
+					UIS.InputBegan:Connect(function(input, gpe)
+						if gpe then print("gpe is the culprit") return end
+						if input.UserInputType == Enum.UserInputType.MouseButton1 and Tab.Hover or Enum.UserInputType.Touch and Tab.Hover then
 							Tab:Activate()
 						end
 					end)
