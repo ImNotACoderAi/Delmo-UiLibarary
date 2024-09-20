@@ -1105,7 +1105,16 @@ do
 									Dropdown:Remove(i)
 								end
 							end
-
+							
+							function Dropdown:Refresh()
+								for id, _ in pairs(Dropdown.Items) do
+									self:Remove(id)
+								end
+								for id, value in pairs(Dropdown.Items) do
+									self:Add(id, value)
+								end
+							end
+							
 							function Dropdown:Toggle()
 								Dropdown.Open = not Dropdown.Open
 
@@ -1369,6 +1378,7 @@ do
 			-- StarterGui.bombaclat.Notifs Holder.Notif.NotifType
 			WarningUI["54"] = Instance.new("TextLabel", WarningUI["50"]);
 			WarningUI["54"]["BorderSizePixel"] = 0;
+			WarningUI["54"]["TextWrapped"] = true;
 			WarningUI["54"]["TextXAlignment"] = Enum.TextXAlignment.Left;
 			WarningUI["54"]["TextYAlignment"] = Enum.TextYAlignment.Top;
 			WarningUI["54"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
